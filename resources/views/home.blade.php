@@ -28,53 +28,85 @@
 @section('content')
 
 {{-- ═══ HERO ═══ --}}
-<section id="hero" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+<section id="heroSection" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+    <div id="heroGlow" class="hidden md:block" aria-hidden="true"></div>
+    <div class="hero-grid-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
     <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent/8 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
     <div class="absolute bottom-1/4 left-0 w-64 h-64 bg-surface-light/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
-    <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
+    <div id="heroGrid" class="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
         <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
 
             <div>
-                <p class="reveal text-sm font-medium text-accent tracking-widest uppercase mb-5">ITCS Student &middot; Aspiring IT Professional</p>
-                <h1 class="reveal d1 font-[family-name:var(--font-display)] font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-text mb-6">
+                <div class="hero-slide mb-5">
+                    <span class="inline-flex items-center gap-2 text-xs font-medium text-accent tracking-widest uppercase border border-accent/30 bg-accent/5 px-3 py-1.5 rounded-full">
+                        <span class="pulse-dot w-2 h-2 rounded-full bg-accent"></span>
+                        Open to internships &amp; collaborations
+                    </span>
+                </div>
+                <p class="hero-slide d1 text-sm font-medium text-accent tracking-widest uppercase mb-5">ITCS Student &middot; Aspiring IT Professional</p>
+                <h1 class="hero-slide d2 font-[family-name:var(--font-display)] font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-text mb-4">
                     Hi, I'm <span class="text-accent">Prince Cedrick</span>
                 </h1>
-                <p class="reveal d2 text-base md:text-lg text-muted leading-relaxed max-w-lg mb-10">
+                <p class="hero-slide d2 text-base md:text-lg text-muted leading-relaxed max-w-lg mb-2">
+                    <span class="typing-caret" data-typing="ITCS student|Laravel developer|problem solver|lifelong learner"></span>
+                </p>
+                <p class="hero-slide d3 text-base md:text-lg text-muted leading-relaxed max-w-lg mb-10">
                     <strong class="font-medium text-text">ITCS Student</strong> passionate about technology, problem-solving, and creative thinking. I'm continuously developing my skills in programming, systems, and digital tools.
                 </p>
-                <div class="reveal d3 flex flex-wrap gap-4">
+                <div class="hero-slide d3 flex flex-wrap gap-4">
                     <a href="#work" class="shimmer inline-flex items-center gap-2 bg-text text-bg font-medium px-7 py-3.5 rounded-full hover:bg-text/90 transition-colors text-sm">
                         View my work
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </a>
                     <a href="#contact" class="inline-flex items-center gap-2 border border-border text-text font-medium px-7 py-3.5 rounded-full hover:bg-surface hover:border-muted transition-colors text-sm">Get in touch</a>
                 </div>
-                <div class="reveal d4 flex flex-wrap gap-8 sm:gap-10 mt-14 pt-8 border-t border-border/60">
+                <div data-stats class="hero-slide d4 flex flex-wrap gap-8 sm:gap-10 mt-14 pt-8 border-t border-border/60">
                     <div>
-                        <p class="font-[family-name:var(--font-display)] font-bold text-3xl text-text">2027</p>
+                        <p class="font-[family-name:var(--font-display)] font-bold text-3xl text-text"><span data-target="2027">0</span></p>
                         <p class="text-xs text-muted mt-1.5">Expected Graduation</p>
                     </div>
                     <div>
-                        <a href="#work" class="font-[family-name:var(--font-display)] font-bold text-3xl text-text hover:text-accent transition-colors nl">{{ count($projects) }}</a>
+                        <a href="#work" class="font-[family-name:var(--font-display)] font-bold text-3xl text-text hover:text-accent transition-colors nl"><span data-target="{{ count($projects) }}">0</span></a>
                         <p class="text-xs text-muted mt-1.5">{{ count($projects) === 1 ? 'Project Built' : 'Projects Built' }}</p>
                     </div>
                     <div>
-                        <p class="font-[family-name:var(--font-display)] font-bold text-3xl text-text">7</p>
+                        <p class="font-[family-name:var(--font-display)] font-bold text-3xl text-text"><span data-target="7">0</span></p>
                         <p class="text-xs text-muted mt-1.5">Languages Known</p>
                     </div>
                 </div>
             </div>
 
-            <div class="reveal d2 flex justify-center md:justify-end">
-                <div class="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
-                    <div class="pf w-full h-full rounded-3xl">
+            <div class="hero-slide d2 flex justify-center md:justify-end">
+                <div id="heroPhoto" class="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                    <div class="offset-frame" aria-hidden="true"></div>
+                    <div class="pf w-full h-full rounded-3xl relative z-10">
                         <img src="{{ asset('images/profile.jpg') }}" alt="Prince Cedrick G. Ancheta — ITCS Student" loading="eager">
                     </div>
-                    <div class="absolute -bottom-4 -left-4 bg-accent text-bg font-[family-name:var(--font-display)] font-bold text-sm px-4 py-2.5 rounded-2xl shadow-lg shadow-accent/10">Student &amp; Developer</div>
+                    <div class="bob absolute -bottom-4 -left-4 bg-accent text-bg font-[family-name:var(--font-display)] font-bold text-sm px-4 py-2.5 rounded-2xl shadow-lg shadow-accent/10 z-20">Student &amp; Developer</div>
+                    <div class="bob-slow absolute -top-4 -right-4 bg-surface-light text-text font-[family-name:var(--font-display)] font-bold text-sm px-4 py-2.5 rounded-2xl shadow-lg border border-border z-20">Laravel &middot; PHP &middot; MySQL</div>
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    {{-- scroll-down cue --}}
+    <div class="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-muted text-xs" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="w-6 h-10 border-2 border-border rounded-full flex items-start justify-center p-1.5">
+            <span class="w-1 h-2 bg-accent rounded-full animate-bounce"></span>
+        </div>
+    </div>
+
+    {{-- skills band --}}
+    <div class="absolute bottom-0 inset-x-0 z-20 bg-surface/80 backdrop-blur border-t border-border/60 py-3">
+        <div class="marquee">
+            <div class="marquee-track">
+                @foreach (['HTML / CSS','JavaScript','PHP','Laravel','MySQL','C#','C++','HTML / CSS','JavaScript','PHP','Laravel','MySQL','C#','C++'] as $s)
+                    <span class="text-sm text-muted font-medium px-2">{{ $s }}</span>
+                @endforeach
+            </div>
         </div>
     </div>
 </section>
@@ -90,7 +122,7 @@
         <div class="grid md:grid-cols-3 gap-6">
 
             <article class="reveal d1 card-h group bg-surface-light rounded-2xl p-8 border border-border/80 hover:border-accent/60">
-                <div class="w-12 h-12 flex items-center justify-center bg-surface-light rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
+                <div class="service-icon w-12 h-12 flex items-center justify-center bg-surface-light rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
                     <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
                 </div>
                 <h3 class="font-[family-name:var(--font-display)] font-bold text-xl text-text mb-3">Web Development</h3>
@@ -98,7 +130,7 @@
             </article>
 
             <article class="reveal d2 card-h group bg-surface-light rounded-2xl p-8 border border-border/80 hover:border-accent/60">
-                <div class="w-12 h-12 flex items-center justify-center bg-surface-light rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
+                <div class="service-icon w-12 h-12 flex items-center justify-center bg-surface-light rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
                     <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
                 </div>
                 <h3 class="font-[family-name:var(--font-display)] font-bold text-xl text-text mb-3">Database Management</h3>
@@ -106,7 +138,7 @@
             </article>
 
             <article class="reveal d3 card-h group bg-surface-light rounded-2xl p-8 border border-border/80 hover:border-accent/60">
-                <div class="w-12 h-12 flex items-center justify-center bg-surface-light rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
+                <div class="service-icon w-12 h-12 flex items-center justify-center bg-surface-light rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
                     <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2"/></svg>
                 </div>
                 <h3 class="font-[family-name:var(--font-display)] font-bold text-xl text-text mb-3">Systems &amp; Tools</h3>
@@ -130,8 +162,15 @@
                 @if (!empty($project['modal']))
                     <button type="button" @click="window.dispatchEvent(new CustomEvent('{{ $project['modal'] }}-open'))" class="text-left card-h reveal d{{ $loop->iteration }} group rounded-2xl overflow-hidden bg-surface-light border border-border/80 hover:border-accent/60">
                         @if (!empty($project['thumbnail']))
-                            <div class="photo-frame w-full aspect-[16/10]">
-                                <img src="{{ asset($project['thumbnail']) }}" alt="{{ $project['title'] }}" loading="lazy" class="w-full h-full object-cover object-top">
+                            <div class="shine relative">
+                                <div class="photo-frame w-full aspect-[16/10]">
+                                    <img src="{{ asset($project['thumbnail']) }}" alt="{{ $project['title'] }}" loading="lazy" class="w-full h-full object-cover object-top">
+                                </div>
+                                @if ($project['modal'] === 'capstone')
+                                    <span class="absolute top-3 right-3 text-xs font-medium px-2.5 py-1 rounded-full bg-bg/80 text-text border border-border/60 backdrop-blur">Capstone &middot; 2027</span>
+                                @else
+                                    <span class="absolute top-3 right-3 text-xs font-medium px-2.5 py-1 rounded-full bg-accent text-bg">Live</span>
+                                @endif
                             </div>
                         @endif
                         <div class="p-8 md:p-10">
@@ -221,22 +260,18 @@
 
                     <p class="text-xs font-medium text-muted uppercase tracking-widest mb-4">Skills</p>
 
-                    <div class="flex flex-wrap gap-2.5" role="list" aria-label="Skills">
+                    <p class="text-xs font-medium text-muted uppercase tracking-widest mb-3">Web</p>
+                    <div class="flex flex-wrap gap-2.5 mb-5" role="list" aria-label="Web skills" data-skill-chips>
+                        @foreach (['HTML / CSS','JavaScript','PHP','Laravel','MySQL'] as $s)
+                            <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">{{ $s }}</span>
+                        @endforeach
+                    </div>
 
-                        <span role="listitem" class="stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">HTML / CSS</span>
-
-                        <span role="listitem" class="stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">JavaScript</span>
-
-                        <span role="listitem" class="stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">PHP</span>
-
-                        <span role="listitem" class="stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">Laravel</span>
-
-                        <span role="listitem" class="stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">MySQL</span>
-
-                        <span role="listitem" class="stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">C#</span>
-
-                        <span role="listitem" class="stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">C++</span>
-
+                    <p class="text-xs font-medium text-muted uppercase tracking-widest mb-3">Programming</p>
+                    <div class="flex flex-wrap gap-2.5" role="list" aria-label="Programming skills" data-skill-chips>
+                        @foreach (['C#','C++'] as $s)
+                            <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">{{ $s }}</span>
+                        @endforeach
                     </div>
 
                 </div>
@@ -269,27 +304,52 @@
 
 
 
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="edu-timeline relative pl-12" aria-label="Education timeline">
+            <div class="edu-line"></div>
 
-
-
-            <article class="reveal d1 bg-surface-light rounded-2xl p-8 border border-border/80">
-
+            <article class="reveal d1 relative mb-8 bg-surface-light rounded-2xl p-8 border border-border/80">
+                <span class="edu-dot absolute -left-[38px] top-8 w-4 h-4 rounded-full bg-accent border-4 border-bg"></span>
                 <div class="flex items-start gap-4 mb-5">
-
                     <div class="w-12 h-12 flex items-center justify-center bg-surface-light rounded-xl shrink-0">
-
-                        <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg>
-
+                        <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
                     </div>
-
-                    <div>
-
-                        <h3 class="font-[family-name:var(--font-display)] font-bold text-xl text-text mb-1">Bachelor of Science in IT</h3>
-
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-1">
+                            <h3 class="font-[family-name:var(--font-display)] font-bold text-xl text-text">Bachelor of Science in IT</h3>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/20">Currently enrolled</span>
+                        </div>
                         <p class="text-sm text-accent">Information and Communications Technology</p>
-
                     </div>
+                </div>
+                <p class="text-sm text-muted leading-relaxed mb-5">Currently pursuing a degree focused on developing skills in programming, systems design, database management, and digital tools. Expected graduation in 2027.</p>
+                <div class="flex items-center gap-2 text-xs text-muted">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span>2022 &mdash; 2027</span>
+                </div>
+            </article>
+
+            <article class="reveal d2 relative bg-surface-light rounded-2xl p-8 border border-border/80">
+                <span class="edu-dot absolute -left-[38px] top-8 w-4 h-4 rounded-full bg-accent border-4 border-bg"></span>
+                <div class="flex items-start gap-4 mb-5">
+                    <div class="w-12 h-12 flex items-center justify-center bg-surface-light rounded-xl shrink-0">
+                        <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-1">
+                            <h3 class="font-[family-name:var(--font-display)] font-bold text-xl text-text">Senior High School</h3>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-surface/80 text-muted border border-border">Completed</span>
+                        </div>
+                        <p class="text-sm text-accent">HUMSS Strand</p>
+                    </div>
+                </div>
+                <p class="text-sm text-muted leading-relaxed mb-5">Completed the Humanities and Social Sciences strand with a focus on communication, critical thinking, and social sciences.</p>
+                <div class="flex items-center gap-2 text-xs text-muted">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span>2020 &mdash; 2022</span>
+                </div>
+            </article>
+        </div>
+
 
                 </div>
 

@@ -22,8 +22,10 @@
         <div class="max-w-2xl space-y-6">
             <button type="button" @click="window.dispatchEvent(new CustomEvent('capstone-open'))"
                class="group block rounded-2xl overflow-hidden bg-surface-light border border-border/80 hover:border-accent/60 transition-all hover:shadow-lg hover:shadow-accent/5 text-left w-full">
-                <div class="photo-frame w-full aspect-[16/10]">
-                    <img src="{{ asset('images/SS1.png') }}" alt="Capstone System" loading="lazy" class="w-full h-full object-cover object-top"/>
+                <div class="shine relative">
+                    <div class="photo-frame w-full aspect-[16/10]">
+                        <img src="{{ asset('images/SS1.png') }}" alt="Capstone System" loading="lazy" class="w-full h-full object-cover object-top"/>
+                    </div>
                 </div>
                 <div class="p-8">
                     <div class="flex flex-wrap gap-2 mb-4">
@@ -42,8 +44,10 @@
             </button>
             <button type="button" @click="window.dispatchEvent(new CustomEvent('dccp-open'))"
                class="group block rounded-2xl overflow-hidden bg-surface-light border border-border/80 hover:border-accent/60 transition-all hover:shadow-lg hover:shadow-accent/5 text-left w-full">
-                <div class="photo-frame w-full aspect-[16/10]">
-                    <img src="{{ asset('images/S1.png') }}" alt="DCCP Document Portal" loading="lazy" class="w-full h-full object-cover object-top"/>
+                <div class="shine relative">
+                    <div class="photo-frame w-full aspect-[16/10]">
+                        <img src="{{ asset('images/S1.png') }}" alt="DCCP Document Portal" loading="lazy" class="w-full h-full object-cover object-top"/>
+                    </div>
                 </div>
                 <div class="p-8">
                     <div class="flex flex-wrap gap-2 mb-4">

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <script>document.documentElement.classList.add('js');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ $metaDescription ?? 'Prince Cedrick G. Ancheta — ITCS Student and Aspiring IT Professional.' }}">
@@ -33,9 +34,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body x-data x-init="$nextTick(() => { const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }); document.querySelectorAll('.reveal').forEach(el => io.observe(el)); })"
+<body x-data x-init="$nextTick(() => { const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }); document.querySelectorAll('.reveal, .sh').forEach(el => io.observe(el)); })"
       class="bg-bg text-text antialiased"
       style="transition: background-color .3s, color .3s">
+
+    <div id="scrollProgress" class="fixed top-0 left-0 h-0.5 bg-accent z-[70] transition-[width] duration-100" style="width:0%"></div>
 
     {{-- noise overlay --}}
     <style>
@@ -60,6 +63,11 @@
     </main>
 
     @include('partials.footer')
+
+    <button id="backToTop" type="button" aria-label="Back to top"
+        class="fixed bottom-6 right-6 z-50 w-11 h-11 flex items-center justify-center rounded-full bg-accent text-bg shadow-lg hover:bg-accent-light transition-all opacity-0 pointer-events-none">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+    </button>
 
     @stack('scripts')
 </body>
