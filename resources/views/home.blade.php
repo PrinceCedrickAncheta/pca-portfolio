@@ -10,10 +10,10 @@
     $projects = [
         [
             'title' => 'Capstone System',
-            'description' => 'A full-stack capstone project built for the ITCS program. Developed using Laravel, MySQL, and Tailwind CSS — demonstrating skills in web development, database design, and systems thinking.',
+            'description' => 'An online system for St. James the Elder Cathedral Parish in Bangued, Abra. Parishioners can request baptism, confirmation, marriage and death certificates, book baptism, wedding and funeral services, and check mass schedules, events and announcements without going to the parish office.',
             'tags' => ['Full-Stack', 'Laravel', 'MySQL', 'Tailwind CSS'],
-            'url' => 'https://github.com/PrinceCedrickAncheta/Capstone_System',
-            'external' => true,
+            'thumbnail' => 'images/SS1.png',
+            'modal' => 'capstone',
         ],
         [
             'title' => 'DCCP Document Portal',
@@ -128,7 +128,7 @@
         <div class="grid md:grid-cols-2 gap-6">
             @foreach ($projects as $project)
                 @if (!empty($project['modal']))
-                    <button type="button" @click="window.dispatchEvent(new CustomEvent('dccp-open'))" class="text-left card-h reveal d{{ $loop->iteration }} group rounded-2xl overflow-hidden bg-surface-light border border-border/80 hover:border-accent/60">
+                    <button type="button" @click="window.dispatchEvent(new CustomEvent('{{ $project['modal'] }}-open'))" class="text-left card-h reveal d{{ $loop->iteration }} group rounded-2xl overflow-hidden bg-surface-light border border-border/80 hover:border-accent/60">
                         @if (!empty($project['thumbnail']))
                             <div class="photo-frame w-full aspect-[16/10]">
                                 <img src="{{ asset($project['thumbnail']) }}" alt="{{ $project['title'] }}" loading="lazy" class="w-full h-full object-cover object-top">
@@ -450,6 +450,22 @@
         'github' => $dccpProject['github'],
         'images' => array_map(fn ($f) => asset('images/' . $f), $dccpProject['screenshots']),
     ];
+    $capstoneProject = [
+        'title' => 'Capstone System',
+        'description' => 'An online system for St. James the Elder Cathedral Parish in Bangued, Abra. Parishioners can request baptism, confirmation, marriage and death certificates, book baptism, wedding and funeral services, and check mass schedules, events and announcements without going to the parish office.',
+        'tags' => ['Full-Stack', 'Laravel', 'MySQL', 'Tailwind CSS'],
+        'url' => 'https://jamestheeldercathedral.com/',
+        'screenshots' => ['SS1.png', 'SS2.png', 'SS3.png', 'SS4.png', 'SS5.png', 'SS6.png'],
+    ];
+    $capstoneModalData = [
+        'open' => false,
+        'idx' => 0,
+        'title' => $capstoneProject['title'],
+        'description' => $capstoneProject['description'],
+        'tags' => $capstoneProject['tags'],
+        'url' => $capstoneProject['url'],
+        'images' => array_map(fn ($f) => asset('images/' . $f), $capstoneProject['screenshots']),
+    ];
 @endphp
 <div x-data="@js($dccpModalData)"
     x-on:dccp-open.window="open = true; idx = 0; $nextTick(() => { if ($refs.closeBtn) $refs.closeBtn.focus(); })"
@@ -522,6 +538,80 @@
                         class="inline-flex items-center gap-2 border border-border text-text font-medium px-6 py-3 rounded-full hover:bg-surface hover:border-accent transition-colors text-sm">
                         View on GitHub
                         <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Capstone System modal --}}
+<div x-data="@js($capstoneModalData)"
+    x-on:capstone-open.window="open = true; idx = 0; $nextTick(() => { if ($refs.closeBtn) $refs.closeBtn.focus(); })"
+    x-effect="document.body.style.overflow = open ? 'hidden' : ''"
+    @keydown.escape.window="if (open) open = false"
+    @keydown.arrow-left.window="if (open) idx = (idx - 1 + images.length) % images.length"
+    @keydown.arrow-right.window="if (open) idx = (idx + 1) % images.length">
+
+    <div x-show="open" x-cloak
+        class="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6"
+        role="dialog" aria-modal="true" aria-labelledby="capstone-modal-title"
+        :aria-hidden="!open">
+        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+            class="absolute inset-0 bg-black/70 backdrop-blur-sm" @click="open = false"></div>
+
+        <div x-show="open"
+            x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+            class="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-surface-light rounded-2xl border border-border shadow-2xl">
+            <div class="flex items-center justify-between p-5 border-b border-border">
+                <h3 id="capstone-modal-title" class="font-[family-name:var(--font-display)] font-bold text-xl text-text" x-text="title"></h3>
+                <button type="button" x-ref="closeBtn" @click="open = false"
+                    class="w-9 h-9 flex items-center justify-center rounded-full border border-border hover:bg-surface hover:border-accent transition-colors text-muted hover:text-text"
+                    aria-label="Close dialog">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <div class="p-5">
+                <div class="relative aspect-[16/10] w-full max-h-[70vh] overflow-hidden rounded-xl bg-surface-light">
+                    <img :src="images[idx]" :alt="title + ' screenshot ' + (idx + 1)" class="w-full h-full object-contain">
+                    <button type="button" @click="idx = (idx - 1 + images.length) % images.length"
+                        class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-bg/70 border border-border text-text hover:bg-accent hover:text-bg transition-colors"
+                        aria-label="Previous screenshot">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button type="button" @click="idx = (idx + 1) % images.length"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-bg/70 border border-border text-text hover:bg-accent hover:text-bg transition-colors"
+                        aria-label="Next screenshot">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-bg/70 border border-border text-xs text-text" x-text="(idx + 1) + '/' + images.length"></div>
+                </div>
+
+                <div class="flex gap-2 mt-4 overflow-x-auto pb-2">
+                    <template x-for="(img, i) in images" :key="i">
+                        <button type="button" @click="idx = i"
+                            class="shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-colors"
+                            :class="i === idx ? 'border-accent' : 'border-border hover:border-accent/60'">
+                            <img :src="img" :alt="'Thumbnail ' + (i + 1)" class="w-full h-full object-cover object-top">
+                        </button>
+                    </template>
+                </div>
+
+                <p class="text-sm text-muted leading-relaxed mt-4" x-text="description"></p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <template x-for="tag in tags" :key="tag">
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-surface text-accent border border-border" x-text="tag"></span>
+                    </template>
+                </div>
+
+                <div class="mt-6">
+                    <a :href="url" target="_blank" rel="noopener noreferrer"
+                        class="shimmer inline-flex items-center gap-2 bg-accent text-bg font-medium px-6 py-3 rounded-full hover:bg-accent-light transition-colors text-sm">
+                        View the website
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                     </a>
                 </div>
             </div>
