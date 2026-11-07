@@ -1,33 +1,140 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <script>document.documentElement.classList.add('js');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Prince Cedrick G. Ancheta — Filipino IT student passionate about technology, problem-solving, and creative thinking.">
+    <meta name="keywords" content="IT student, portfolio, web developer, programmer, PHP, Laravel, C++, C#">
+    <meta name="author" content="Prince Cedrick G. Ancheta">
+    <meta property="og:title" content="Prince Cedrick G. Ancheta — ITCS Student &amp; Aspiring IT Professional">
+    <meta property="og:description" content="Filipino IT student passionate about technology, problem-solving, and creative thinking.">
+    <meta property="og:type" content="website">
+    <title>Prince Cedrick G. Ancheta — ITCS Student &amp; Aspiring IT Professional</title>
 
-@php
-    $title = 'Prince Cedrick G. Ancheta — ITCS Student & Aspiring IT Professional';
-    $metaDescription = 'Prince Cedrick G. Ancheta — Filipino IT student passionate about technology, problem-solving, and creative thinking.';
-    $ogTitle = 'Prince Cedrick G. Ancheta — ITCS Student & Aspiring IT Professional';
-    $ogDescription = 'Filipino IT student passionate about technology, problem-solving, and creative thinking.';
-    $activePage = 'home';
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 
-    $projects = [
-        [
-            'title' => 'Capstone System',
-            'description' => 'An online system for St. James the Elder Cathedral Parish in Bangued, Abra. Parishioners can request baptism, confirmation, marriage and death certificates, book baptism, wedding and funeral services, and check mass schedules, events and announcements without going to the parish office.',
-            'tags' => ['Full-Stack', 'Laravel', 'MySQL', 'Tailwind CSS'],
-            'thumbnail' => 'images/SS1.png',
-            'modal' => 'capstone',
-        ],
-        [
-            'title' => 'DCCP Document Portal',
-            'description' => "An online document request and tracking portal for the Registrar's Office of Data Center College of the Philippines — students request documents, track status, and see fees.",
-            'tags' => ['Full-Stack', 'PHP', 'MySQL', 'Tailwind CSS'],
-            'thumbnail' => 'images/S1.png',
-            'modal' => 'dccp',
-        ],
-    ];
-@endphp
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+                var theme = stored || (prefersLight ? 'light' : 'dark');
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
 
-@section('content')
+    <link rel="stylesheet" href="/src/css/app.css" /><script type="module" src="/src/js/app.js"></script></head>
 
-{{-- ═══ HERO ═══ --}}
+<body x-data x-init="$nextTick(() => { const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }); document.querySelectorAll('.reveal, .sh').forEach(el => io.observe(el)); })"
+      class="bg-bg text-text antialiased"
+      style="transition: background-color .3s, color .3s">
+
+    <div id="scrollProgress" class="fixed top-0 left-0 h-0.5 bg-accent z-[70] transition-[width] duration-100" style="width:0%"></div>
+
+    
+    <style>
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 40;
+            opacity: .08;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+        }
+        .dark body::before {
+            opacity: .3;
+        }
+    </style>
+
+    <header x-data="{ mm: false, sc: false }"
+    x-init="window.addEventListener('scroll', () => { sc = window.scrollY > 20 }, { passive: true })"
+    class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+    :class="sc ? 'bg-bg/90 backdrop-blur-md border-b border-border/50' : ''">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Main navigation">
+
+        <a href="/#hero" class="font-[family-name:var(--font-display)] font-bold text-xl tracking-tight relative z-10">
+            <span class="text-text">My </span><span class="text-accent">Portfolio</span>
+        </a>
+
+                    <ul class="hidden md:flex items-center gap-8 text-sm" role="list"
+                x-data="{ s: 'hero' }"
+                x-init="window.addEventListener('scroll', () => {
+                    const atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 60;
+                    if (atBottom) { s = 'contact'; return; }
+                    const ids = ['contact','education','about','work','services','hero'];
+                    for (const id of ids) {
+                        const el = document.getElementById(id);
+                        if (el && window.scrollY >= el.offsetTop - 130) { s = id; return; }
+                    }
+                }, { passive: true })">
+                <li><a href="#services" class="nl text-muted hover:text-text transition-colors" :class="s === 'services' ? 'on !text-text' : ''">Services</a></li>
+                <li><a href="#work" class="nl text-muted hover:text-text transition-colors" :class="s === 'work' ? 'on !text-text' : ''">Work</a></li>
+                <li><a href="#about" class="nl text-muted hover:text-text transition-colors" :class="s === 'about' ? 'on !text-text' : ''">About</a></li>
+                <li><a href="#education" class="nl text-muted hover:text-text transition-colors" :class="s === 'education' ? 'on !text-text' : ''">Education</a></li>
+                <li><a href="#contact" class="nl text-muted hover:text-text transition-colors" :class="s === 'contact' ? 'on !text-text' : ''">Contact</a></li>
+            </ul>
+        
+        <div class="flex items-center gap-3">
+            <button type="button" x-data="{ dark: document.documentElement.classList.contains('dark') }"
+                @click="dark = !dark; document.documentElement.classList.toggle('dark', dark); localStorage.setItem('theme', dark ? 'dark' : 'light')"
+                class="hidden md:flex w-9 h-9 items-center justify-center rounded-full border border-border hover:bg-surface-light hover:border-accent transition-colors text-muted hover:text-text"
+                :aria-label="dark ? 'Switch to light mode' : 'Switch to dark mode'">
+                <svg x-show="dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                <svg x-show="!dark" x-cloak class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+            </button>
+            <a href="https://github.com/PrinceCedrickAncheta/pca-portfolio" rel="noopener noreferrer" target="_blank" class="hidden md:flex w-9 h-9 items-center justify-center rounded-full border border-border hover:bg-surface-light hover:border-accent transition-colors text-muted hover:text-text" aria-label="GitHub">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="/#contact" class="hidden md:inline-flex items-center gap-2 shimmer bg-accent text-bg text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">
+                Contact me <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <button @click="mm = !mm" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-border hover:bg-surface-light transition-colors" :aria-expanded="mm" aria-label="Toggle menu">
+                <svg x-show="!mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <svg x-show="mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    
+    <div x-show="mm" x-cloak
+        x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
+        class="md:hidden bg-bg/95 backdrop-blur-md border-t border-border/50">
+        <ul class="flex flex-col px-6 py-6 gap-5 text-sm font-medium" role="list">
+            <li><a href="/#services" @click="mm = false" class="block text-text hover:text-accent transition-colors">Services</a></li>
+            <li><a href="/projects" @click="mm = false" class="block text-text hover:text-accent transition-colors">Work</a></li>
+            <li><a href="/#about" @click="mm = false" class="block text-text hover:text-accent transition-colors">About</a></li>
+            <li><a href="/#education" @click="mm = false" class="block text-text hover:text-accent transition-colors">Education</a></li>
+            <li><a href="/#contact" @click="mm = false" class="block text-text hover:text-accent transition-colors">Contact</a></li>
+            <li class="pt-4 border-t border-border/50 flex items-center gap-3">
+                <a href="/#contact" @click="mm = false" class="inline-flex shimmer bg-accent text-bg font-medium text-sm px-5 py-2.5 rounded-full">Contact me &rarr;</a>
+                <button type="button" x-data="{ dark: document.documentElement.classList.contains('dark') }"
+                    @click="dark = !dark; document.documentElement.classList.toggle('dark', dark); localStorage.setItem('theme', dark ? 'dark' : 'light'); mm = false"
+                    class="w-10 h-10 flex items-center justify-center rounded-full border border-border hover:border-accent text-muted hover:text-text transition-colors"
+                    :aria-label="dark ? 'Switch to light mode' : 'Switch to dark mode'">
+                    <svg x-show="dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                    <svg x-show="!dark" x-cloak class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+                </button>
+                <a href="https://github.com/PrinceCedrickAncheta/pca-portfolio" rel="noopener noreferrer" target="_blank" @click="mm = false" class="w-10 h-10 flex items-center justify-center rounded-full border border-border hover:border-accent text-muted hover:text-text transition-colors" aria-label="GitHub">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+    <main>
+        
+
 <section id="heroSection" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
     <div id="heroGlow" class="hidden md:block" aria-hidden="true"></div>
     <div class="hero-grid-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
@@ -67,8 +174,8 @@
                         <p class="text-xs text-muted mt-1.5">Expected Graduation</p>
                     </div>
                     <div>
-                        <a href="#work" class="font-[family-name:var(--font-display)] font-bold text-3xl text-text hover:text-accent transition-colors nl"><span data-target="{{ count($projects) }}">0</span></a>
-                        <p class="text-xs text-muted mt-1.5">{{ count($projects) === 1 ? 'Project Built' : 'Projects Built' }}</p>
+                        <a href="#work" class="font-[family-name:var(--font-display)] font-bold text-3xl text-text hover:text-accent transition-colors nl"><span data-target="2">0</span></a>
+                        <p class="text-xs text-muted mt-1.5">Projects Built</p>
                     </div>
                     <div>
                         <p class="font-[family-name:var(--font-display)] font-bold text-3xl text-text"><span data-target="7">0</span></p>
@@ -81,7 +188,7 @@
                 <div id="heroPhoto" class="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
                     <div class="offset-frame" aria-hidden="true"></div>
                     <div class="pf w-full h-full rounded-3xl relative z-10">
-                        <img src="{{ asset('images/profile.jpg') }}" alt="Prince Cedrick G. Ancheta — ITCS Student" loading="eager">
+                        <img src="/images/profile.jpg" alt="Prince Cedrick G. Ancheta — ITCS Student" loading="eager">
                     </div>
                     <div class="bob absolute -bottom-4 -left-4 bg-accent text-bg font-[family-name:var(--font-display)] font-bold text-sm px-4 py-2.5 rounded-2xl shadow-lg shadow-accent/10 z-20">Student &amp; Developer</div>
                     <div class="bob-slow absolute -top-4 -right-4 bg-surface-light text-text font-[family-name:var(--font-display)] font-bold text-sm px-4 py-2.5 rounded-2xl shadow-lg border border-border z-20">Laravel &middot; PHP &middot; MySQL</div>
@@ -91,7 +198,7 @@
         </div>
     </div>
 
-    {{-- scroll-down cue --}}
+    
     <div class="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-muted text-xs" aria-hidden="true">
         <span>Scroll</span>
         <div class="w-6 h-10 border-2 border-border rounded-full flex items-start justify-center p-1.5">
@@ -99,19 +206,30 @@
         </div>
     </div>
 
-    {{-- skills band --}}
+    
     <div class="absolute bottom-0 inset-x-0 z-20 bg-surface/80 backdrop-blur border-t border-border/60 py-3">
         <div class="marquee">
             <div class="marquee-track">
-                @foreach (['HTML / CSS','JavaScript','PHP','Laravel','MySQL','C#','C++','HTML / CSS','JavaScript','PHP','Laravel','MySQL','C#','C++'] as $s)
-                    <span class="text-sm text-muted font-medium px-2">{{ $s }}</span>
-                @endforeach
-            </div>
+                                    <span class="text-sm text-muted font-medium px-2">HTML / CSS</span>
+                                    <span class="text-sm text-muted font-medium px-2">JavaScript</span>
+                                    <span class="text-sm text-muted font-medium px-2">PHP</span>
+                                    <span class="text-sm text-muted font-medium px-2">Laravel</span>
+                                    <span class="text-sm text-muted font-medium px-2">MySQL</span>
+                                    <span class="text-sm text-muted font-medium px-2">C#</span>
+                                    <span class="text-sm text-muted font-medium px-2">C++</span>
+                                    <span class="text-sm text-muted font-medium px-2">HTML / CSS</span>
+                                    <span class="text-sm text-muted font-medium px-2">JavaScript</span>
+                                    <span class="text-sm text-muted font-medium px-2">PHP</span>
+                                    <span class="text-sm text-muted font-medium px-2">Laravel</span>
+                                    <span class="text-sm text-muted font-medium px-2">MySQL</span>
+                                    <span class="text-sm text-muted font-medium px-2">C#</span>
+                                    <span class="text-sm text-muted font-medium px-2">C++</span>
+                            </div>
         </div>
     </div>
 </section>
 
-{{-- ═══ SERVICES ═══ --}}
+
 <section id="services" class="py-28 bg-surface relative">
     <div class="section-divider absolute top-0 inset-x-0"></div>
     <div class="max-w-6xl mx-auto px-6">
@@ -149,7 +267,7 @@
     </div>
 </section>
 
-{{-- ═══ WORK ═══ --}}
+
 <section id="work" class="py-28 relative">
     <div class="max-w-6xl mx-auto px-6">
         <div class="mb-16">
@@ -158,55 +276,52 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-6">
-            @foreach ($projects as $project)
-                @if (!empty($project['modal']))
-                    <button type="button" @click="window.dispatchEvent(new CustomEvent('{{ $project['modal'] }}-open'))" class="text-left card-h reveal d{{ $loop->iteration }} group rounded-2xl overflow-hidden bg-surface-light border border-border/80 hover:border-accent/60">
-                        @if (!empty($project['thumbnail']))
-                            <div class="shine relative">
+                                                <button type="button" @click="window.dispatchEvent(new CustomEvent('capstone-open'))" class="text-left card-h reveal d1 group rounded-2xl overflow-hidden bg-surface-light border border-border/80 hover:border-accent/60">
+                                                    <div class="shine relative">
                                 <div class="photo-frame w-full aspect-[16/10]">
-                                    <img src="{{ asset($project['thumbnail']) }}" alt="{{ $project['title'] }}" loading="lazy" class="w-full h-full object-cover object-top">
+                                    <img src="/images/SS1.png" alt="Capstone System" loading="lazy" class="w-full h-full object-cover object-top">
                                 </div>
-                                @if ($project['modal'] === 'capstone')
-                                    <span class="absolute top-3 right-3 text-xs font-medium px-2.5 py-1 rounded-full bg-bg/80 text-text border border-border/60 backdrop-blur">Capstone &middot; 2027</span>
-                                @else
-                                    <span class="absolute top-3 right-3 text-xs font-medium px-2.5 py-1 rounded-full bg-accent text-bg">Live</span>
-                                @endif
-                            </div>
-                        @endif
-                        <div class="p-8 md:p-10">
+                                                                    <span class="absolute top-3 right-3 text-xs font-medium px-2.5 py-1 rounded-full bg-bg/80 text-text border border-border/60 backdrop-blur">Capstone &middot; 2027</span>
+                                                            </div>
+                                                <div class="p-8 md:p-10">
                             <div class="flex flex-wrap gap-2 mb-4">
-                                @foreach ($project['tags'] as $tag)
-                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light {{ $loop->first ? 'text-accent border border-border' : 'text-muted' }}">{{ $tag }}</span>
-                                @endforeach
-                            </div>
-                            <h3 class="font-[family-name:var(--font-display)] font-bold text-2xl text-text mb-3 group-hover:text-accent transition-colors">{{ $project['title'] }}</h3>
-                            <p class="text-sm text-muted leading-relaxed mb-6 max-w-2xl">{{ $project['description'] }}</p>
+                                                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light text-accent border border-border">Full-Stack</span>
+                                                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light text-muted">Laravel</span>
+                                                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light text-muted">MySQL</span>
+                                                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light text-muted">Tailwind CSS</span>
+                                                            </div>
+                            <h3 class="font-[family-name:var(--font-display)] font-bold text-2xl text-text mb-3 group-hover:text-accent transition-colors">Capstone System</h3>
+                            <p class="text-sm text-muted leading-relaxed mb-6 max-w-2xl">An online system for St. James the Elder Cathedral Parish in Bangued, Abra. Parishioners can request baptism, confirmation, marriage and death certificates, book baptism, wedding and funeral services, and check mass schedules, events and announcements without going to the parish office.</p>
                             <span class="inline-flex items-center gap-1.5 text-sm font-medium text-text nl">View screenshots <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
                         </div>
                     </button>
-                @else
-                    <a href="{{ $project['url'] }}" target="_blank" rel="noopener noreferrer" class="block card-h reveal d{{ $loop->iteration }} group rounded-2xl overflow-hidden bg-surface-light border border-border/80 hover:border-accent/60">
-                        <div class="p-8 md:p-10">
+                                                                <button type="button" @click="window.dispatchEvent(new CustomEvent('dccp-open'))" class="text-left card-h reveal d2 group rounded-2xl overflow-hidden bg-surface-light border border-border/80 hover:border-accent/60">
+                                                    <div class="shine relative">
+                                <div class="photo-frame w-full aspect-[16/10]">
+                                    <img src="/images/S1.png" alt="DCCP Document Portal" loading="lazy" class="w-full h-full object-cover object-top">
+                                </div>
+                                                                    <span class="absolute top-3 right-3 text-xs font-medium px-2.5 py-1 rounded-full bg-accent text-bg">Live</span>
+                                                            </div>
+                                                <div class="p-8 md:p-10">
                             <div class="flex flex-wrap gap-2 mb-4">
-                                @foreach ($project['tags'] as $tag)
-                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light {{ $loop->first ? 'text-accent border border-border' : 'text-muted' }}">{{ $tag }}</span>
-                                @endforeach
-                            </div>
-                            <h3 class="font-[family-name:var(--font-display)] font-bold text-2xl text-text mb-3 group-hover:text-accent transition-colors">{{ $project['title'] }}</h3>
-                            <p class="text-sm text-muted leading-relaxed mb-6 max-w-2xl">{{ $project['description'] }}</p>
-                            <span class="inline-flex items-center gap-1.5 text-sm font-medium text-text nl">View on GitHub <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
+                                                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light text-accent border border-border">Full-Stack</span>
+                                                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light text-muted">PHP</span>
+                                                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light text-muted">MySQL</span>
+                                                                    <span class="text-xs px-2.5 py-1 rounded-full bg-surface-light text-muted">Tailwind CSS</span>
+                                                            </div>
+                            <h3 class="font-[family-name:var(--font-display)] font-bold text-2xl text-text mb-3 group-hover:text-accent transition-colors">DCCP Document Portal</h3>
+                            <p class="text-sm text-muted leading-relaxed mb-6 max-w-2xl">An online document request and tracking portal for the Registrar&#039;s Office of Data Center College of the Philippines — students request documents, track status, and see fees.</p>
+                            <span class="inline-flex items-center gap-1.5 text-sm font-medium text-text nl">View screenshots <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
                         </div>
-                    </a>
-                @endif
-            @endforeach
-        </div>
+                    </button>
+                                    </div>
     </div>
 
 </section>
 
 
 
-{{-- ═══ ABOUT ═══ --}}
+
 
 <section id="about" class="py-28 bg-surface relative">
 
@@ -222,7 +337,7 @@
 
                 <div class="pf w-full aspect-square max-w-md mx-auto rounded-3xl">
 
-                    <img src="{{ asset('images/profile.jpg') }}" alt="Prince Cedrick G. Ancheta" loading="lazy">
+                    <img src="/images/profile.jpg" alt="Prince Cedrick G. Ancheta" loading="lazy">
 
                 </div>
 
@@ -254,7 +369,7 @@
 
 
 
-                {{-- Skills --}}
+                
 
                 <div class="reveal d4 mt-10">
 
@@ -262,17 +377,18 @@
 
                     <p class="text-xs font-medium text-muted uppercase tracking-widest mb-3">Web</p>
                     <div class="flex flex-wrap gap-2.5 mb-5" role="list" aria-label="Web skills" data-skill-chips>
-                        @foreach (['HTML / CSS','JavaScript','PHP','Laravel','MySQL'] as $s)
-                            <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">{{ $s }}</span>
-                        @endforeach
-                    </div>
+                                                    <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">HTML / CSS</span>
+                                                    <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">JavaScript</span>
+                                                    <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">PHP</span>
+                                                    <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">Laravel</span>
+                                                    <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">MySQL</span>
+                                            </div>
 
                     <p class="text-xs font-medium text-muted uppercase tracking-widest mb-3">Programming</p>
                     <div class="flex flex-wrap gap-2.5" role="list" aria-label="Programming skills" data-skill-chips>
-                        @foreach (['C#','C++'] as $s)
-                            <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">{{ $s }}</span>
-                        @endforeach
-                    </div>
+                                                    <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">C#</span>
+                                                    <span role="listitem" class="skill-chip stag text-sm bg-surface/80 border border-border/60 text-text px-4 py-2 rounded-full hover:border-accent/60">C++</span>
+                                            </div>
 
                 </div>
 
@@ -288,7 +404,7 @@
 
 
 
-{{-- ═══ EDUCATION ═══ --}}
+
 
 <section id="education" class="py-28 relative">
 
@@ -409,7 +525,7 @@
 
 
 
-{{-- ═══ CONTACT ═══ --}}
+
 
 <section id="contact" class="py-28 relative">
 
@@ -490,44 +606,8 @@
 
 
 
-{{-- DCCP Document Portal modal --}}
-@php
-    $dccpProject = [
-        'title' => 'DCCP Document Portal',
-        'description' => "An online document request and tracking portal for the Registrar's Office of Data Center College of the Philippines. Students request documents, track their status, and view associated fees.",
-        'tags' => ['Full-Stack', 'PHP', 'MySQL', 'Tailwind CSS'],
-        'url' => 'https://dccp-abra-registraroffice.infinityfree.io/',
-        'github' => 'https://github.com/PrinceCedrickAncheta/Student_Docu_Req',
-        'screenshots' => ['S1.png', 'S2.png', 'S3.png', 'S4.png', 'S5.png'],
-    ];
-    $dccpModalData = [
-        'open' => false,
-        'idx' => 0,
-        'title' => $dccpProject['title'],
-        'description' => $dccpProject['description'],
-        'tags' => $dccpProject['tags'],
-        'url' => $dccpProject['url'],
-        'github' => $dccpProject['github'],
-        'images' => array_map(fn ($f) => asset('images/' . $f), $dccpProject['screenshots']),
-    ];
-    $capstoneProject = [
-        'title' => 'Capstone System',
-        'description' => 'An online system for St. James the Elder Cathedral Parish in Bangued, Abra. Parishioners can request baptism, confirmation, marriage and death certificates, book baptism, wedding and funeral services, and check mass schedules, events and announcements without going to the parish office.',
-        'tags' => ['Full-Stack', 'Laravel', 'MySQL', 'Tailwind CSS'],
-        'url' => 'https://jamestheeldercathedral.com/',
-        'screenshots' => ['SS1.png', 'SS2.png', 'SS3.png', 'SS4.png', 'SS5.png', 'SS6.png'],
-    ];
-    $capstoneModalData = [
-        'open' => false,
-        'idx' => 0,
-        'title' => $capstoneProject['title'],
-        'description' => $capstoneProject['description'],
-        'tags' => $capstoneProject['tags'],
-        'url' => $capstoneProject['url'],
-        'images' => array_map(fn ($f) => asset('images/' . $f), $capstoneProject['screenshots']),
-    ];
-@endphp
-<div x-data="@js($dccpModalData)"
+
+<div x-data="JSON.parse('{\u0022open\u0022:false,\u0022idx\u0022:0,\u0022title\u0022:\u0022DCCP Document Portal\u0022,\u0022description\u0022:\u0022An online document request and tracking portal for the Registrar\\u0027s Office of Data Center College of the Philippines. Students request documents, track their status, and view associated fees.\u0022,\u0022tags\u0022:[\u0022Full-Stack\u0022,\u0022PHP\u0022,\u0022MySQL\u0022,\u0022Tailwind CSS\u0022],\u0022url\u0022:\u0022https:\\\/\\\/dccp-abra-registraroffice.infinityfree.io\\\/\u0022,\u0022github\u0022:\u0022https:\\\/\\\/github.com\\\/PrinceCedrickAncheta\\\/Student_Docu_Req\u0022,\u0022images\u0022:[\u0022/images\\\/S1.png\u0022,\u0022/images\\\/S2.png\u0022,\u0022/images\\\/S3.png\u0022,\u0022/images\\\/S4.png\u0022,\u0022/images\\\/S5.png\u0022]}')"
     x-on:dccp-open.window="open = true; idx = 0; $nextTick(() => { if ($refs.closeBtn) $refs.closeBtn.focus(); })"
     x-effect="document.body.style.overflow = open ? 'hidden' : ''"
     @keydown.escape.window="if (open) open = false"
@@ -605,8 +685,8 @@
     </div>
 </div>
 
-{{-- Capstone System modal --}}
-<div x-data="@js($capstoneModalData)"
+
+<div x-data="JSON.parse('{\u0022open\u0022:false,\u0022idx\u0022:0,\u0022title\u0022:\u0022Capstone System\u0022,\u0022description\u0022:\u0022An online system for St. James the Elder Cathedral Parish in Bangued, Abra. Parishioners can request baptism, confirmation, marriage and death certificates, book baptism, wedding and funeral services, and check mass schedules, events and announcements without going to the parish office.\u0022,\u0022tags\u0022:[\u0022Full-Stack\u0022,\u0022Laravel\u0022,\u0022MySQL\u0022,\u0022Tailwind CSS\u0022],\u0022url\u0022:\u0022https:\\\/\\\/jamestheeldercathedral.com\\\/\u0022,\u0022images\u0022:[\u0022/images\\\/SS1.png\u0022,\u0022/images\\\/SS2.png\u0022,\u0022/images\\\/SS3.png\u0022,\u0022/images\\\/SS4.png\u0022,\u0022/images\\\/SS5.png\u0022,\u0022/images\\\/SS6.png\u0022]}')"
     x-on:capstone-open.window="open = true; idx = 0; $nextTick(() => { if ($refs.closeBtn) $refs.closeBtn.focus(); })"
     x-effect="document.body.style.overflow = open ? 'hidden' : ''"
     @keydown.escape.window="if (open) open = false"
@@ -678,12 +758,30 @@
         </div>
     </div>
 </div>
-@endsection
+    </main>
 
+    <footer class="border-t border-border/40">
+    <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-muted">&copy; <span id="year"></span> My Portfolio. All rights reserved.</p>
+        <div class="flex items-center gap-5">
+            <a href="https://github.com/PrinceCedrickAncheta/pca-portfolio" rel="noopener noreferrer" target="_blank" class="text-muted hover:text-accent transition-colors" aria-label="GitHub">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <p class="text-xs text-muted">Built with
+                <a href="https://tailwindcss.com" rel="noopener noreferrer" target="_blank" class="hover:text-accent transition-colors">Tailwind CSS</a>
+                &amp;
+                <a href="https://alpinejs.dev" rel="noopener noreferrer" target="_blank" class="hover:text-accent transition-colors">Alpine.js</a>
+            </p>
+        </div>
+    </div>
+</footer>
 
+    <button id="backToTop" type="button" aria-label="Back to top"
+        class="fixed bottom-6 right-6 z-50 w-11 h-11 flex items-center justify-center rounded-full bg-accent text-bg shadow-lg hover:bg-accent-light transition-all opacity-0 pointer-events-none">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+    </button>
 
-@push('scripts')
-
+    
 <script>
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -696,5 +794,5 @@
 
 </script>
 
-@endpush
-
+</body>
+</html>
